@@ -1,0 +1,19 @@
+img {
+    height: 40dvh;
+    border-radius: 20px;
+}
+
+.member {
+    display: inline-block;
+}
+
+.main {
+    overflow-x: scroll;
+    scroll-snap-type: mandatory;
+    white-space: nowrap;
+    padding-top: 5dvh;
+}
+
+#highlighted {
+    background-color: aqua;
+}
