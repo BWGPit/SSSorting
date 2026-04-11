@@ -2,6 +2,7 @@
 <head>
     <title>SSSorting algorithms</title>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="Scripts/formatText.ts"></script>
     <script type="text/babel" src="Scripts/triples.ts"></script>
     <script type="text/babel" src="Scripts/utils.ts"></script>
     <script type="text/babel" src="Scripts/sorting.ts"></script>
@@ -11,6 +12,28 @@
 <body>
     <h1>SSSorting algorithms</h1>
     <h2>Insertion sort</h2>
+    <div class="description">
+        <p>
+            Insertion sort is described as follows. Its running time is
+            <i><span class="equation" role="math">
+            O(n<sup>2</sup>)
+            </span></i>.
+        </p>
+        <pre class="pseudocode">
+INSERTION-SORT(A)
+FOR j = 2 TO A.length DO
+    {
+        key = A[j];
+        i = j-1;
+        WHILE i > 0 && A[i] > key DO
+            {
+                A[i+1] = A[i];
+                i--;
+            }
+        A[i+1] = key;
+    }
+        </pre>
+    </div>
     <div class="main" id="tripleS_field_insertionsort">
         <h1 style="margin-top: 48dvh; margin-left: 48dvw;">Loading...</h1>
     </div>
