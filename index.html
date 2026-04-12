@@ -23,18 +23,18 @@
                 </i>
             </p>
             <pre class="pseudocode">
-    INSERTION-SORT(A)
-    FOR j = 2 TO A.length DO
-        {
-            key = A[j];
-            i = j-1;
-            WHILE i > 0 && A[i] > key DO
-                {
-                    A[i+1] = A[i];
-                    i--;
-                }
-            A[i+1] = key;
-        }</pre>
+INSERTION-SORT(A)
+FOR j = 2 TO A.length DO
+    {
+        key = A[j];
+        i = j-1;
+        WHILE i > 0 && A[i] > key DO
+            {
+                A[i+1] = A[i];
+                i--;
+            }
+        A[i+1] = key;
+    }</pre>
         </div>
         <div class="main" id="tripleS_field_insertionsort">
             <h1 style="margin-top: 48dvh; margin-left: 48dvw;">Loading...</h1>
@@ -48,39 +48,39 @@
             Merge sort is an example of divide-and-conquer algorithms (in Latin, "divide et impera").
             <br>Its running time is <i class="equation">&Theta;(n<sup>2</sup>)</i>. The pseudocode is described as follows.
             <pre class="pseudocode">
-    MERGE-SORT(A, p, r)
-    IF p < r DO
-        {
-            q = &LeftFloor;(p+r)/2&RightFloor;;
-            MERGE-SORT(A, p, q);
-            MERGE-SORT(A, q+1, r);
-            MERGE(A, p, q, r);
-        }</pre>
-            <pre class="pseudocode" style="display: inline-block;">
-    MERGE(A, p, q, r)
-    n1 = q-p+1;
-    n2 = r-q;
-    L[1..n1+1] = new Array;
-    R[1..n2+1] = new Array;
-    FOR i = 1 TO n1 DO L[i] = A[p+i-1];
-    FOR j = 1 TO n2 DO R[j] = A[q+j];
-    L[n1+1] = &infin;;
-    R[n2+1] = &infin;;
-    i = 1;
-    j = 1;
-    FOR k = p TO r DO
+MERGE-SORT(A, p, r)
+IF p < r DO
     {
-        IF L[i] &le; R[j] THEN
-            {
-                A[k] = L[i];
-                i++;
-            }
-            ELSE
-            {
-                A[k] = R[j];
-                j++;
-            }
+        q = &LeftFloor;(p+r)/2&RightFloor;;
+        MERGE-SORT(A, p, q);
+        MERGE-SORT(A, q+1, r);
+        MERGE(A, p, q, r);
     }</pre>
+            <pre class="pseudocode" style="display: inline-block;">
+MERGE(A, p, q, r)
+n1 = q-p+1;
+n2 = r-q;
+L[1..n1+1] = new Array;
+R[1..n2+1] = new Array;
+FOR i = 1 TO n1 DO L[i] = A[p+i-1];
+FOR j = 1 TO n2 DO R[j] = A[q+j];
+L[n1+1] = &infin;;
+R[n2+1] = &infin;;
+i = 1;
+j = 1;
+FOR k = p TO r DO
+{
+    IF L[i] &le; R[j] THEN
+        {
+            A[k] = L[i];
+            i++;
+        }
+        ELSE
+        {
+            A[k] = R[j];
+            j++;
+        }
+}</pre>
         </div>
         <div class="main" id="tripleS_field_mergesort">
             <h1 style="margin-top: 48dvh; margin-left: 48dvw;">Loading...</h1>
