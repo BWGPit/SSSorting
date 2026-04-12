@@ -63,7 +63,7 @@ button {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-#highlighted {
+.highlighted {
     background-color: #fff;
     color: #000;
     border-radius: 20px;

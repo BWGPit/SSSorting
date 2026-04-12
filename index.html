@@ -11,32 +11,82 @@
 </head>
 <body>
     <h1>SSSorting algorithms</h1>
-    <h2>Insertion sort</h2>
-    <div class="description">
-        <p>
-            Insertion sort is described as follows. Its running time is
-            <i><span class="equation" role="math">
-            O(n<sup>2</sup>)
-            </span></i>.
-        </p>
-        <pre class="pseudocode">
-INSERTION-SORT(A)
-FOR j = 2 TO A.length DO
+    <div class="section" id="insertion">
+        <h2>Insertion sort</h2>
+        <div class="description">
+            <p>
+                Insertion sort is described as follows, note that arrays are 1-indexed in this pseudocode.<br>This algorithm's running time is
+                <i><span class="equation" role="math">
+                O(n<sup>2</sup>)
+                </span></i>. There is a loop invariant which proves the correctness of Insertion sort:<br><i class="equation">
+                    At the start of each iteration, the subarray A[1..j-1] stores the first j-1 elements of A in sorted order.
+                </i>
+            </p>
+            <pre class="pseudocode">
+    INSERTION-SORT(A)
+    FOR j = 2 TO A.length DO
+        {
+            key = A[j];
+            i = j-1;
+            WHILE i > 0 && A[i] > key DO
+                {
+                    A[i+1] = A[i];
+                    i--;
+                }
+            A[i+1] = key;
+        }</pre>
+        </div>
+        <div class="main" id="tripleS_field_insertionsort">
+            <h1 style="margin-top: 48dvh; margin-left: 48dvw;">Loading...</h1>
+        </div>
+        <button onclick="nextStepInsertion()">Next</button>
+    </div>
+
+    <div class="section" id="merge">
+        <h2>Merge sort</h2>
+        <div class="description">
+            Merge sort is an example of divide-and-conquer algorithms (in Latin, "divide et impera").
+            <br>Its running time is <i class="equation">&Theta;(n<sup>2</sup>)</i>. The pseudocode is described as follows.
+            <pre class="pseudocode">
+    MERGE-SORT(A, p, r)
+    IF p < r DO
+        {
+            q = &LeftFloor;(p+r)/2&RightFloor;;
+            MERGE-SORT(A, p, q);
+            MERGE-SORT(A, q+1, r);
+            MERGE(A, p, q, r);
+        }</pre>
+            <pre class="pseudocode" style="display: inline-block;">
+    MERGE(A, p, q, r)
+    n1 = q-p+1;
+    n2 = r-q;
+    L[1..n1+1] = new Array;
+    R[1..n2+1] = new Array;
+    FOR i = 1 TO n1 DO L[i] = A[p+i-1];
+    FOR j = 1 TO n2 DO R[j] = A[q+j];
+    L[n1+1] = &infin;;
+    R[n2+1] = &infin;;
+    i = 1;
+    j = 1;
+    FOR k = p TO r DO
     {
-        key = A[j];
-        i = j-1;
-        WHILE i > 0 && A[i] > key DO
+        IF L[i] &le; R[j] THEN
             {
-                A[i+1] = A[i];
-                i--;
+                A[k] = L[i];
+                i++;
             }
-        A[i+1] = key;
-    }
-        </pre>
+            ELSE
+            {
+                A[k] = R[j];
+                j++;
+            }
+    }</pre>
+        </div>
+        <div class="main" id="tripleS_field_mergesort">
+            <h1 style="margin-top: 48dvh; margin-left: 48dvw;">Loading...</h1>
+        </div>
+        <button onclick="nextStepMerge()">Next</button>
     </div>
-    <div class="main" id="tripleS_field_insertionsort">
-        <h1 style="margin-top: 48dvh; margin-left: 48dvw;">Loading...</h1>
-    </div>
-    <button onclick="nextStepInsertion()">Next</button>
-    <p>&copy; 2026 @ritopit on Discord | not affiliated with MODHAUS | stan QWER and tripleS | <a href="https://github.com/BWGPit/SSSorting">Github</a></p>
+
+    <p>&copy; 2026 @ritopit on Discord | not affiliated with MODHAUS | stan QWER and tripleS | main reference: <i>Cormen, "Introduction to Algorithms and Data Structures", 3rd edition</i> | <a href="https://github.com/BWGPit/SSSorting">Github</a></p>
 </body>

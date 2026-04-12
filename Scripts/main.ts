@@ -1,32 +1,56 @@
-let mainDiv: Element = document.getElementsByClassName("main")[0]
-
-function draw(currentStatus: number[], higlightKey: number = -1): void {
+function draw(mainDiv: Element, currentStatus: number[], higlightKey: number = -1, higlightInterval: [number, number] = [Infinity, -Infinity]): void {
     mainDiv.innerHTML = ""
     for (let memberIndex of currentStatus) {
         let s: number = memberIndex+1
         let member: tripleSmember = tripleS[memberIndex]
         let hk: string = ''
-        if (higlightKey > -1 && memberIndex === higlightKey) {
-            hk = 'id="highlighted"'
-        } 
-        mainDiv.innerHTML += '<div class="member"' + hk + '><img class="member_poca" src="' + member.pocaUrl + '"><p class="member_name">S' + String(s) + '<br>' + member.name + '</p></div>\n'
+        if (
+            (higlightKey > -1 && memberIndex === higlightKey) ||
+            ((higlightInterval[0] < higlightInterval[1]) && (currentStatus.indexOf(memberIndex) >= higlightInterval[0]) && (currentStatus.indexOf(memberIndex) <= higlightInterval[1]))
+        ) {
+            hk = ' highlighted'
+        }
+        mainDiv.innerHTML += '<div class="member' + hk + '"><img class="member_poca" src="' + member.pocaUrl + '"><p class="member_name">S' + String(s) + '<br>' + member.name + '</p></div>\n'
     }
-    let highlightedMember: Element | null = document.getElementById("highlighted")
+    let highlightedMember: Element | null = mainDiv.getElementsByClassName("highlighted")[0]
+    console.log(highlightedMember)
     if (highlightedMember != null) highlightedMember.scrollIntoView({behavior:"auto", block:"center", inline:"center"})
 }
 
 console.log("Hi S - we are tripleS!")
-let sss: number[] = shuffle(indexArray(24))
-draw(sss)
+let tripleSmap: Map<Element, number[]> = new Map()
+
+for (let d of document.getElementsByClassName("main")) {
+    let mappedArray: number[] = shuffle(indexArray(24))
+    tripleSmap.set(d, mappedArray)
+    draw(d, mappedArray)
+}
 
 // Insertion sort
-// TODO: Describe the algorithm and higlight the i-th member
-let is: Generator<[number[], number], void, void> = insertionSort(sss)
+let isField: Element | null = document.getElementById("tripleS_field_insertionsort")
+if (isField == null) {throw new TypeError("IS field null")}
+let isArray: number[] | undefined = tripleSmap.get(isField)
+if (isArray == null) {throw new TypeError("Array null")}
+let is: Generator<[number[], number], void, void> = insertionSort(isArray)
 
 function nextStepInsertion(): void {
     let curr: [number[], number]|void = is.next().value
-    console.log(curr)
-    if (curr != undefined) {
-        draw(...curr)
+    
+    if (curr != undefined && isField != null) {
+        draw(isField, ...curr)
+    }
+}
+
+// Merge sort
+let msField: Element | null = document.getElementById("tripleS_field_mergesort")
+if (msField == null) {throw new TypeError("MS field null")}
+let msArray: number[] | undefined = tripleSmap.get(msField)
+if (msArray == null) {throw new TypeError("Array null")}
+let ms: Generator<[number[], number, number], void, void> = _mergeSortFn(msArray, 0, msArray.length-1)  // Transpiler puts a _ before mergeSortFn only, idk why
+
+function nextStepMerge(): void {
+    let curr: [number[], number, number]|void = ms.next().value
+    if (curr != undefined && msField != null) {
+        draw(msField, curr[0], -1, [curr[1], curr[2]])
     }
 }
