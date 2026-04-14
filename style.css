@@ -4,13 +4,7 @@ img {
 }
 
 body {
-    width: 75dvw;
-    margin: auto;
-    font-size: 150%;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     background-color: #000;
-    color: #fff;
-    scrollbar-color: #fff #000;
 }
 
 button {
@@ -22,6 +16,57 @@ button {
     width: 100%;
     margin: auto;
     border-radius: 20px;
+}
+
+.page-content {
+    display: flex;
+}
+
+.body-wrapper {
+    width: 75dvw;
+    margin: auto;
+    font-size: 150%;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    background-color: #000;
+    color: #fff;
+    scrollbar-color: #fff #000;
+}
+
+.navbar {
+    z-index: 99;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.navbar-content {
+    background-color: #000;
+    display: inline-block;
+    width: 75dvw;
+    margin: auto;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 140%;
+}
+
+a:link {
+    color: lightblue;
+    text-decoration: none;
+}
+a:visited {
+    color: lightblue;
+    text-decoration: none;
+}
+a:hover {
+    color: rgb(104, 232, 232);
+}
+
+.navbar-element {
+    display: inline-flex;
+    margin-left: 5%;
+    margin-right: 5%;
+    color: #fff;
 }
 
 .member {
@@ -67,3 +112,4 @@ button {
     color: #000;
     border-radius: 20px;
 }
+
