@@ -15,6 +15,18 @@ let insertionSort: SortingAlgorithm = function*(a) {
     }
 }
 
+let selectionSort: SortingAlgorithm = function*(A) {
+    for (let i = 0; i < A.length-1; i++) {
+        yield [A, i]
+        let min: number = i
+        for (let j = i+1; j < A.length; j++) {
+            if (A[j] < A[min]) {min = j}
+        }
+        [A[i], A[min]] = [A[min], A[i]]
+    }
+    yield [A, A.length-1]
+}
+
 let mergeSortFn: MergeSortingAlgorithm = function*(A, p, r) {
     if (p < r) {
         let q: number = Math.floor((p+r)/2)

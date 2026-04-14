@@ -41,6 +41,21 @@ function nextStepInsertion(): void {
     }
 }
 
+// Selection sort
+let ssField: Element | null = document.getElementById("tripleS_field_selectionsort")
+if (ssField == null) {throw new TypeError("SS field null")}
+let ssArray: number[] | undefined = tripleSmap.get(ssField)
+if (ssArray == null) {throw new TypeError("Array null")}
+let ss: Generator<[number[], number], void, void> = selectionSort(ssArray)
+
+function nextStepSelection(): void {
+    let curr: [number[], number]|void = ss.next().value
+    
+    if (curr != undefined && ssField != null) {
+        draw(ssField, ...curr)
+    }
+}
+
 // Merge sort
 let msField: Element | null = document.getElementById("tripleS_field_mergesort")
 if (msField == null) {throw new TypeError("MS field null")}

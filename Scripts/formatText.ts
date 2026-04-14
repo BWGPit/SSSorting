@@ -10,7 +10,8 @@ let Colors: {[k: string]: string} = {
     SquareBrackets: "#297add",
     Functions: "#7396db",
     AddSubtract: "#4adfbe",
-    Property: "#cc74f2"
+    Property: "#cc74f2",
+    Comment: "#00680c"
 }
 
 let syntax: [string | RegExp, (x: string) => string][] = [
@@ -29,7 +30,8 @@ let syntax: [string | RegExp, (x: string) => string][] = [
     [/[A-Z_-]+[(].*[)]/gi, (x: string): string => colorString(x, Colors.Functions)],
     [/[0-9a-zA-Z_-][+][+]/gi, (x: string): string => colorString(x, Colors.AddSubtract)],
     [/[0-9a-zA-Z_-][-][-]/gi, (x: string): string => colorString(x, Colors.AddSubtract)],
-    [/[.][0-9a-zA-Z_-]+/gi, (x: string): string => colorString(x, Colors.Property)]
+    [/[.][0-9a-zA-Z_-]+/gi, (x: string): string => colorString(x, Colors.Property)],
+    [/[\/][\/].*[.]*$/gim, (x: string): string => colorString(x, Colors.Comment)]
 ]
 
 for (let pre of document.getElementsByClassName("pseudocode")) {
