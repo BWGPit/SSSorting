@@ -69,3 +69,17 @@ function nextStepMerge(): void {
         draw(msField, curr[0], -1, [curr[1], curr[2]])
     }
 }
+
+//Quick sort
+let qsField: Element | null = document.getElementById("tripleS_field_quicksort")
+if (qsField == null) {throw new TypeError("QS field null")}
+let qsArray: number[] | undefined = tripleSmap.get(qsField)
+if (qsArray == null) {throw new TypeError("Array null")}
+let qs: Generator<[number[], number], void, void> = _quickSort(qsArray, 0, qsArray.length-1)
+
+function nextStepQuick(): void {
+    let curr: [number[], number] | void = qs.next().value
+    if (curr != undefined && qsField != null) {
+        draw(qsField, ...curr)
+    }
+}

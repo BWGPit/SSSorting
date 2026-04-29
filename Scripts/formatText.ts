@@ -15,7 +15,7 @@ let Colors: {[k: string]: string} = {
 }
 
 let syntax: [string | RegExp, (x: string) => string][] = [
-    [/[0-9]/gi, (x: string): string => colorString(x, Colors.Numbers)],
+    [/[^a-zA-Z][0-9]/gi, (x: string): string => colorString(x, Colors.Numbers)],
     ["FOR", (x: string): string => colorString(x, Colors.Keywords)],
     ["WHILE", (x: string): string => colorString(x, Colors.Keywords)],
     ["TO", (x: string): string => colorString(x, Colors.Keywords)],

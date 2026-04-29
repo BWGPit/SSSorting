@@ -60,3 +60,25 @@ let merge: (a: number[], p:number, q: number, r: number) => void = function(A, p
         }
     }
 }
+
+let quickSort = function*(A: number[], p: number, r: number): Generator<[number[], number], void, void> {
+    if (p < r) {
+        let q: number = partition(A, p, r)
+        yield [A, q]
+        yield* quickSort(A, p, q-1)
+        yield* quickSort(A, q+1, r)
+    }
+}
+
+let partition = function(A: number[], p: number, r: number): number {
+    let x: number = A[r]
+    let i: number = p-1
+    for (let j=p; j<r; j++) {
+        if (A[j] <= x) {
+            i++
+            [A[i], A[j]] = [A[j], A[i]]
+        }
+    }
+    [A[i+1], A[r]] = [A[r], A[i+1]]
+    return i+1
+}

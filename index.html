@@ -18,6 +18,7 @@
             <a class="navbar-element" href="#insertion">Insertion sort</a>
             <a class="navbar-element" href="#selection">Selection sort</a>
             <a class="navbar-element" href="#merge">Merge sort</a>
+            <a class="navbar-element" href="#quick">Quick sort</a>
         </div>
     </div>
     <div class="body-wrapper">
@@ -91,7 +92,7 @@ FOR i = 1 TO A.length-1 DO
             <br>Its running time is <i class="equation">&Theta;(n log n)</i>. The pseudocode is described as follows.
             <pre class="pseudocode">
 MERGE-SORT(A, p, r)
-IF p < r DO
+IF p < r THEN
 {
     q = &LeftFloor;(p+r)/2&RightFloor;;
     MERGE-SORT(A, p, q);
@@ -113,21 +114,55 @@ j = 1;
 FOR k = p TO r DO
 {
     IF L[i] &le; R[j] THEN
-        {
-            A[k] = L[i];
-            i++;
-        }
-        ELSE
-        {
-            A[k] = R[j];
-            j++;
-        }
+    {
+        A[k] = L[i];
+        i++;
+    }
+    ELSE
+    {
+        A[k] = R[j];
+        j++;
+    }
 }</pre>
         </div>
         <div class="main" id="tripleS_field_mergesort">
             <h1 style="margin-top: 48dvh; margin-left: 48dvw;">Loading...</h1>
         </div>
         <button onclick="nextStepMerge()">Next</button>
+    </div>
+
+    <div class="section" id="quick">
+        <h2>Quick sort</h2>
+        <div class="description">
+            Quick sort is probably the best sorting algorithm described here, as it is generally the quickest among them and works in place, while <a href="#merge">Merge sort</a> has an additional space cost.
+            <br>Although Quick sort's worst-case time complexity is <i class="equation">&Theta;(n<sup>2</sup>)</i>, its average-case running time is <i class="equation">&Theta;(n log n)</i> and it has small hidden constants. The pseudocode is described as follows.
+            <pre class="pseudocode">
+QUICK-SORT(A, p, r)
+IF p < r THEN
+{
+    q = PARTITION(A, p, r);
+    QUICK-SORT(A, p, q-1);
+    QUICK-SORT(A, q+1, R);
+}</pre>
+            <pre class="pseudocode" style="display: inline-block;">
+PARTITION(A, p, r)
+x = A[r];
+i = p-1;
+FOR j = p TO r-1 DO
+{
+    IF A[j] &le; x THEN
+    {
+        i++;
+        SWAP(A[i], A[j]); // SWAP is defined as a usual procedure for swapping variables
+    }
+}
+SWAP(A[i+1], A[r]);
+RETURN i+1;</pre>
+        </div>
+        <div class="main" id="tripleS_field_quicksort">
+            <h1 style="margin-top: 48dvh; margin-left: 48dvw;">Loading...</h1>
+        </div>
+        <button onclick="nextStepQuick()">Next</button>
     </div>
 
     <p>&copy; 2026 @ritopit on Discord | not affiliated with MODHAUS | stan QWER and tripleS | main reference: <i>Cormen, "Introduction to Algorithms and Data Structures", 3rd edition</i> | <a href="https://github.com/BWGPit/SSSorting">Github</a></p>
