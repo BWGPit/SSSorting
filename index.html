@@ -183,7 +183,7 @@ RETURN &LeftFloor; 2i &RightFloor;;</pre>
 RIGHT(i)
 RETURN &LeftFloor; 2i+1 &RightFloor;;</pre>
             <br>Heap sort makes use of a Max-heap to sort the array given in input, which is implicitely converted into said data structure which has the following property: 
-            <i>each node's value is greater than, or equal to, that of its children</i>. To maintain this property, the following procedure is used, which runs in <i class="equation">O(log n)</i>, assuming that the node upon which is called is the root of a Max-heap.
+            <i>each node's value is greater than, or equal to, that of its children</i>. To maintain this property, the following procedure is used, which runs in <i class="equation">O(log n)</i>, assuming that the children of the node upon which is called are roots of Max-heaps.
             <pre class="pseudocode">
 MAX-HEAPIFY(A, i)
 l = LEFT(i);
