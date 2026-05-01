@@ -64,7 +64,7 @@ if (msArray == null) {throw new TypeError("Array null")}
 let ms: Generator<[number[], number, number], void, void> = _mergeSortFn(msArray, 0, msArray.length-1)  // Transpiler puts a _ before mergeSortFn only, idk why
 
 function nextStepMerge(): void {
-    let curr: [number[], number, number]|void = ms.next().value
+    let curr: [number[], number, number] | void = ms.next().value
     if (curr != undefined && msField != null) {
         draw(msField, curr[0], -1, [curr[1], curr[2]])
     }
@@ -81,5 +81,18 @@ function nextStepQuick(): void {
     let curr: [number[], number] | void = qs.next().value
     if (curr != undefined && qsField != null) {
         draw(qsField, ...curr)
+    }
+}
+
+let hsField: Element | null = document.getElementById("tripleS_field_heapsort")
+if (hsField == null) {throw new TypeError("HS field null")}
+let hsArray: number[] | undefined = tripleSmap.get(hsField)
+if (hsArray == null) {throw new TypeError("Array null")}
+let hs: Generator<[number[], number, number], void, void> = heapSort(hsArray)
+
+function nextStepHeap(): void {
+    let curr: [number[], number, number] | void = hs.next().value
+    if (curr != undefined && hsField != null) {
+        draw(hsField, curr[0], -1, [curr[1], curr[2]])
     }
 }

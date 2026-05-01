@@ -82,3 +82,44 @@ let partition = function(A: number[], p: number, r: number): number {
     [A[i+1], A[r]] = [A[r], A[i+1]]
     return i+1
 }
+
+class Heap extends Array {
+    heapSize: number
+    constructor(...arr: Array<number>) {
+        super(...arr)
+        this.heapSize = this.length
+    }
+}
+function heapParent(i: number): number {return Math.floor(i+1/2)}
+function heapLeft(i: number): number {return 2*i+1}
+function heapRight(i: number): number {return 2*i+2}
+function maxHeapify(A: Heap, i: number): void {
+    let l = heapLeft(i)
+    let r = heapRight(i)
+    let largest: number
+    if (l <= A.heapSize-1 && A[l] > A[i]) {largest = l}
+    else {largest = i}
+    if (r <= A.heapSize-1 && A[r] > A[largest]) {largest = r}
+    if (largest != i) {
+        [A[i], A[largest]] = [A[largest], A[i]]
+        maxHeapify(A, largest)
+    }
+}
+function buildMaxHeap(A: number[]): Heap {
+    let AHeap: Heap = new Heap(...A)
+    for (let i = Math.floor(A.length/2); i >= 0; i--) {
+        maxHeapify(AHeap, i)
+    }
+    return AHeap
+}
+
+let heapSort = function*(a: number[]): Generator<[number[], number, number], void, void> {
+    let AHeap: Heap = buildMaxHeap(a)
+    yield [[...AHeap], 0, AHeap.heapSize]
+    for (let i = AHeap.length-1; i >= 0; i--) {
+        [AHeap[0], AHeap[i]] = [AHeap[i], AHeap[0]]
+        AHeap.heapSize--
+        maxHeapify(AHeap, 0)
+        yield [[...AHeap], 0, AHeap.heapSize]
+    }
+}

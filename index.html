@@ -19,6 +19,7 @@
             <a class="navbar-element" href="#selection">Selection sort</a>
             <a class="navbar-element" href="#merge">Merge sort</a>
             <a class="navbar-element" href="#quick">Quick sort</a>
+            <a class="navbar-element" href="#heap">Heap sort</a>
         </div>
     </div>
     <div class="body-wrapper">
@@ -94,7 +95,7 @@ FOR i = 1 TO A.length-1 DO
 MERGE-SORT(A, p, r)
 IF p < r THEN
 {
-    q = &LeftFloor;(p+r)/2&RightFloor;;
+    q = &LeftFloor; (p+r)/2 &RightFloor;;
     MERGE-SORT(A, p, q);
     MERGE-SORT(A, q+1, r);
     MERGE(A, p, q, r);
@@ -163,6 +164,71 @@ RETURN i+1;</pre>
             <h1 style="margin-top: 48dvh; margin-left: 48dvw;">Loading...</h1>
         </div>
         <button onclick="nextStepQuick()">Next</button>
+    </div>
+
+    <div class="section" id="heap">
+        <h2>Heap sort</h2>
+        <div class="description">
+            This sorting algorithm introduces an interesting data structure which is Heap. By definition, it is a <i>nearly complete binary tree</i> where all leaves are in the left side.
+            This makes it easy to implicitely represent it as an array where each element represents a node and it is possible to jump from a node to its children and to its parent with the following procedures, which take 
+            the index of a node as input and return the index of the desired node.
+            Once again, note that here arrays are assumed to be 1-indexed.
+            <pre class="pseudocode">
+PARENT(i)
+RETURN &LeftFloor; i/2 &RightFloor;;</pre>
+            <pre class="pseudocode" style="display: inline-block;">
+LEFT(i)
+RETURN &LeftFloor; 2i &RightFloor;;</pre>
+            <pre class="pseudocode" style="display: inline-block;">
+RIGHT(i)
+RETURN &LeftFloor; 2i+1 &RightFloor;;</pre>
+            <br>Heap sort makes use of a Max-heap to sort the array given in input, which is implicitely converted into said data structure which has the following property: 
+            <i>each node's value is greater than, or equal to, that of its children</i>. To maintain this property, the following procedure is used, which runs in <i class="equation">O(log n)</i>, assuming that the node upon which is called is the root of a Max-heap.
+            <pre class="pseudocode">
+MAX-HEAPIFY(A, i)
+l = LEFT(i);
+r = RIGHT(i);
+largest = NIL;
+IF l &le; A.heap-size &and; A[l] > A[i] THEN
+{
+    largest = l;
+}
+ELSE
+{
+    largest = i;
+}
+IF r &le; A.heap-size &and; A[r] > A[largest] THEN
+{
+    largest = r;
+}
+IF largest &NotEqual; i THEN
+{
+    SWAP(A[i], A[largest]); // SWAP is defined as a usual procedure for swapping variables
+    MAX-HEAPIFY(A, largest); // Recursively repeat this action upwards towards the tree root
+}</pre>
+            The <i class="equation">heap-size</i> property is added to the array when the Heap is built. The building process costs <i class="equation">O(n)</i>.
+            <pre class="pseudocode">
+BUILD-MAX-HEAP(A)
+A.heap-size = A.length;
+FOR i = &LeftFloor; A.length/2 &RightFloor; DOWNTO 1 DO
+{
+    MAX-HEAPIFY(A, i);
+}</pre>
+            With these procedures, the Heap sort algorithm is simply described as follows. Its time complexity is <i class="equation">O(n log n)</i>.
+            <pre class="pseudocode">
+HEAP-SORT(A)
+BUILD-MAX-HEAP(A);
+FOR i = A.length DOWNTO 2 DO
+{
+    SWAP(A[1], A[i]);
+    A.heap-size -= 1;
+    MAX-HEAPIFY(A, 1);
+}</pre>
+        </div>
+        <div class="main" id="tripleS_field_heapsort">
+            <h1 style="margin-top: 48dvh; margin-left: 48dvw;">Loading...</h1>
+        </div>
+        <button onclick="nextStepHeap()">Next</button>
     </div>
 
     <p>&copy; 2026 @ritopit on Discord | not affiliated with MODHAUS | stan QWER and tripleS | main reference: <i>Cormen, "Introduction to Algorithms and Data Structures", 3rd edition</i> | <a href="https://github.com/BWGPit/SSSorting">Github</a></p>

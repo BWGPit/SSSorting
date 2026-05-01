@@ -11,18 +11,23 @@ let Colors: {[k: string]: string} = {
     Functions: "#7396db",
     AddSubtract: "#4adfbe",
     Property: "#cc74f2",
-    Comment: "#00680c"
+    Comment: "#00680c",
+    Nihil: "#aeaeae"
 }
 
 let syntax: [string | RegExp, (x: string) => string][] = [
     [/[^a-zA-Z][0-9]/gi, (x: string): string => colorString(x, Colors.Numbers)],
     ["FOR", (x: string): string => colorString(x, Colors.Keywords)],
     ["WHILE", (x: string): string => colorString(x, Colors.Keywords)],
-    ["TO", (x: string): string => colorString(x, Colors.Keywords)],
-    ["IF", (x: string): string => colorString(x, Colors.Keywords)],
+    [/[^a-zA-Z]TO[^a-zA-Z]/gi, (x: string): string => colorString(x, Colors.Keywords)],
+    ["DOWNTO", (x: string): string => colorString(x, Colors.Keywords)],
+    [/[^a-zA-Z]IF[^a-zA-Z]/gi, (x: string): string => colorString(x, Colors.Keywords)],
     ["THEN", (x: string): string => colorString(x, Colors.Keywords)],
     ["ELSE", (x: string): string => colorString(x, Colors.Keywords)],
-    ["DO", (x: string): string => colorString(x, Colors.Keywords)],
+    [/[^a-zA-Z]DO[^a-zA-Z]/gi, (x: string): string => colorString(x, Colors.Keywords)],
+    ["RETURN", (x: string): string => colorString(x, Colors.Keywords)],
+    ["NIL", (x: string): string => colorString(x, Colors.Nihil)],
+    ["∧", (x: string): string => colorString(x, Colors.Keywords)],
     ["{", (x: string): string => colorString(x, Colors.CurlyBrackets)],
     ["}", (x: string): string => colorString(x, Colors.CurlyBrackets)],
     ["[", (x: string): string => colorString(x, Colors.SquareBrackets)],
