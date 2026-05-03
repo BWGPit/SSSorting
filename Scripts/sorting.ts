@@ -90,7 +90,6 @@ class Heap extends Array {
         this.heapSize = this.length
     }
 }
-function heapParent(i: number): number {return Math.floor(i+1/2)}
 function heapLeft(i: number): number {return 2*i+1}
 function heapRight(i: number): number {return 2*i+2}
 function maxHeapify(A: Heap, i: number): void {
