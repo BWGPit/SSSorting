@@ -193,7 +193,7 @@ RETURN &LeftFloor; 2i &RightFloor;;</pre>
 RIGHT(i)
 RETURN &LeftFloor; 2i+1 &RightFloor;;</pre>
             <br>Heap sort makes use of a Max-heap to sort the array given in input, which is implicitely converted into said data structure which has the following property: 
-            <i>each node's value is greater than, or equal to, that of its children</i>. To maintain this property, the following procedure is used, which runs in <i class="equation">O(log n)</i>, assuming that the children of the node upon which is called are roots of Max-heaps.
+            <i>each node's value is greater than, or equal to, that of its children</i>. To maintain this property, the following procedure is used, which runs in <i class="equation">O(log n)</i>, assuming that only the subtreee on which it is called violates the property of Max-heaps.
             <pre class="pseudocode">
 MAX-HEAPIFY(A, i)
 l = LEFT(i);
@@ -214,7 +214,7 @@ IF r &le; A.heap-size &and; A[r] > A[largest] THEN
 IF largest &NotEqual; i THEN
 {
     SWAP(A[i], A[largest]); // SWAP is defined as a usual procedure for swapping variables
-    MAX-HEAPIFY(A, largest); // Recursively repeat this action upwards towards the tree root
+    MAX-HEAPIFY(A, largest); // Recursively repeat this action downwards
 }</pre>
             The <i class="equation">heap-size</i> property is added to the array when the Heap is built. The building process costs <i class="equation">O(n)</i>.
             <pre class="pseudocode">
