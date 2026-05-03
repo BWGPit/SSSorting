@@ -115,11 +115,11 @@ function buildMaxHeap(A: number[]): Heap {
 
 let heapSort = function*(a: number[]): Generator<[number[], number, number], void, void> {
     let AHeap: Heap = buildMaxHeap(a)
-    yield [[...AHeap], 0, AHeap.heapSize]
+    yield [[...AHeap], 0, AHeap.heapSize-1]
     for (let i = AHeap.length-1; i >= 0; i--) {
         [AHeap[0], AHeap[i]] = [AHeap[i], AHeap[0]]
         AHeap.heapSize--
         maxHeapify(AHeap, 0)
-        yield [[...AHeap], 0, AHeap.heapSize]
+        yield [[...AHeap], 0, AHeap.heapSize-1]
     }
 }
