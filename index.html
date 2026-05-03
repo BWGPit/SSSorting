@@ -136,7 +136,17 @@ FOR k = p TO r DO
         <h2>Quick sort</h2>
         <div class="description">
             Quick sort is probably the best sorting algorithm described here, as it is generally the quickest among them and works in place, while <a href="#merge">Merge sort</a> has an additional space cost.
-            <br>Although Quick sort's worst-case time complexity is <i class="equation">&Theta;(n<sup>2</sup>)</i>, its average-case running time is <i class="equation">&Theta;(n log n)</i> and it has small hidden constants. The pseudocode is described as follows.
+            <br>Although Quick sort's worst-case time complexity is <i class="equation">&Theta;(n<sup>2</sup>)</i>, its average-case running time is <i class="equation">&Theta;(n log n)</i> and it has small hidden constants.
+            Some notewhorthy properties of Quick sort are that the worst case happen when the array is already sorted and that, even if the average case produces a heavily unbalanced recursion tree 
+            (like \(T(\frac{n}{10}) + T(\frac{9}{10} n) \) at each step) its complexity remains <i class="equation">&Theta;(n log n)</i>. The former is caused by a suboptimal pivot choice in the partition function, that can be avoided in various 
+            ways such as making the pivot a random value (by using a pseudorandomic function that many programming language include), the latter is more interesting and can be understood with the following intuition.<br>
+            <i class="equation">
+                Let us admit, for hypothesis, that for some k > 0 the first level of the recursion tree divides recursive calls as
+                \[T(\frac{n}{k}) + T(\frac{k-1}{k} n)\]
+                and following recursive calls are unbalanced by the same proportions. Then, the smaller part's tree has height \(log_k n\) while the other one's height is \(log_{k/k-1} n\), which is the longest of the two. 
+                Now, since in asymptotic notation even \(log_{k/k-1} n\) is still treated as \(log n\), the height of the whole tree is still \(log n\), which is similar to the best case and translates to a complexity of O(n log n).
+            </i>
+            <br>The pseudocode is described as follows.
             <pre class="pseudocode">
 QUICK-SORT(A, p, r)
 IF p < r THEN
